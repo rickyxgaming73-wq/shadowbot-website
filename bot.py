@@ -27,6 +27,20 @@ async def ping(ctx):
     await ctx.send("🏓 Pong!")
 
 
+@bot.event
+async def on_message(message):
+    # Ignore messages from the bot itself
+    if message.author == bot.user:
+        return
+    
+    # Respond to "Halo" message
+    if message.content.lower() == "halo":
+        await message.reply("Hey there! 👋")
+    
+    # Process commands
+    await bot.process_commands(message)
+
+
 def main():
     token = os.getenv("DISCORD_TOKEN")
     if not token:
